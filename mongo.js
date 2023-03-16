@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 // const MONGO_URL = process.env.MONGO_URL;
-const MONGO_URL = process.env.MONGO_LOCAL_URL;
+const MONGO_URL = process.env.MONGO_ATLAS_URL;
 const client = new MongoClient(MONGO_URL); 
 
 

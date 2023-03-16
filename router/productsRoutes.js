@@ -16,16 +16,18 @@ router.get("/", async (req, res)=>{
 
 // GET ALL PRODUCTS OF A CATEGORY 
 router.get("/res", async (req, res)=>{
+    
     let cat = req.query.cat;
-    //db.content.createIndex({name:"text",line:"text"})
-    //db.content.find({$text:{$search:"love"}})  
-    // const cindex = await client.db("scraper").collection("products").createIndex({name:"text", name: "text"})
-    // console.log(cindex);
+    // console.log(cat);
+
+    // creating index for using $text operator 
+    await client.db("scraper").collection("products").createIndex({name: "text", name: "text"})
+    
     const result = await client.db("scraper").collection("products")
         .find({$text: {$search: cat}}).toArray()
-    // console.log(result);
     result ? res.status(200).send(result) : res.status(500).send("something went wrong")
 
 })
 
 export default router;
+
